@@ -6,7 +6,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1xspc"]
 
-[node name="Node3D" type="CharacterBody3D" unique_id=304244398]
+[node name="Player" type="CharacterBody3D" unique_id=304244398]
 script = ExtResource("1_onrkg")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=949129657]
