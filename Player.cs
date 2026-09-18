@@ -73,7 +73,19 @@ public partial class Player : CharacterBody3D {
     Vector3 direction = (Basis.X * input.X + Basis.Z * input.Y).Normalized();
 
     // 直接赋值而不是累加，松键立刻停下，没有惯性
-    Velocity = direction * Speed;
+    direction = direction * Speed;
+    direction.Y = Velocity.Y;
+
+    direction.Y = direction.Y - 20f * (float)delta; // 给个恒定的速度不断向下
+    if (Input.IsActionJustPressed("jump") && IsOnFloor()) {
+      direction.Y = 10;
+    }
+    if (Input.IsActionJustReleased("jump") && direction.Y > 0) {
+      // 空格一放开就马上向下掉
+      direction.Y = 0;
+    }
+
+    Velocity = direction;
 
     // 按 Velocity 移动并由引擎处理碰撞滑动
     MoveAndSlide();
