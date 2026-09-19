@@ -12,6 +12,8 @@ public partial class Player : CharacterBody3D {
 
   // 俯仰角上下限（度），防止视角翻转
   [Export] public float MaxPitch = 80.0f;
+  [Export] public PackedScene BulletPrefab;
+  [Export] public Node3D BulletSpawnerNode;
 
   // 挂在角色身上的相机，只负责上下（俯仰）旋转
   private Camera3D _camera;
@@ -90,5 +92,29 @@ public partial class Player : CharacterBody3D {
     // 按 Velocity 移动并由引擎处理碰撞滑动
     MoveAndSlide();
 
+    Shoot();
+  }
+
+  // TODO: 长按连发
+  public void Shoot() {
+    if (!Input.IsActionJustPressed("shoot")) {
+      return;
+    }
+    // 这两个导出变量要在编辑器里手动赋值；字段改名后场景里存的旧值会失效，这里兜一下防止空引用
+    if (BulletPrefab == null || BulletSpawnerNode == null) {
+      GD.PrintErr("BulletPrefab 或 BulletSpawnerNode 未赋值，无法发射子弹");
+      return;
+    }
+
+    Node3D bullet = BulletPrefab.Instantiate<Node3D>();
+    // bullet 现在是 BulletSpawnerNode 的子节点，Transform 是相对父节点的局部坐标，
+    // 所以要用 GlobalTransform 赋值，用 Transform 会把偏移叠两遍
+
+    BulletSpawnerNode.AddChild(bullet);
+    bullet.TopLevel = true;
+    bullet.GlobalTransform = BulletSpawnerNode.GlobalTransform;
+
+
+    GD.Print($"transform {bullet.Transform}");
   }
 }

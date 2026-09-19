@@ -3,11 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://du8qxm4phw75t" path="res://player/simple_gun/gun_model.glb" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://4b7xfvkff2x3" path="res://Player.cs" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://dtjxqmt3usxfp" path="res://player/reticle.png" id="3_i3pqv"]
+[ext_resource type="PackedScene" uid="uid://c1ub2k7ugmajr" path="res://bullet.tscn" id="4_hqtel"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1xspc"]
 
-[node name="Player" type="CharacterBody3D" unique_id=304244398]
+[node name="Player" type="CharacterBody3D" unique_id=304244398 node_paths=PackedStringArray("BulletSpawnerNode")]
 script = ExtResource("1_onrkg")
+BulletPrefab = ExtResource("4_hqtel")
+BulletSpawnerNode = NodePath("Camera3D/gun_model/BulletLoc")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=949129657]
 anchors_preset = 8
@@ -35,3 +38,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6026454, 0)
 
 [node name="gun_model" parent="Camera3D" unique_id=1685706683 instance=ExtResource("1_4flbx")]
 transform = Transform3D(-0.30442965, 0, -0.018644037, 0, 0.305, 0, 0.018644037, 0, -0.30442965, 0.48389453, -0.2891804, -0.64453083)
+
+[node name="BulletLoc" type="Marker3D" parent="Camera3D/gun_model" unique_id=540520630]
+transform = Transform3D(-0.99999976, 0, 8.7422755e-08, 0, 1, 0, -8.7422755e-08, 0, -0.99999976, -0.011475921, 0.005264759, 0.66712976)
