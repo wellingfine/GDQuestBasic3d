@@ -17,10 +17,12 @@ public partial class Player : CharacterBody3D {
 
   // 挂在角色身上的相机，只负责上下（俯仰）旋转
   private Camera3D _camera;
+  private Timer _timer;
 
   public override void _Ready() {
     // 拿到子节点 Camera3D
     _camera = GetNode<Camera3D>("Camera3D");
+    _timer = GetNode<Timer>("Timer");
 
     // 捕获鼠标：光标隐藏并锁定在窗口内，这样能持续拿到相对位移
     Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -95,11 +97,13 @@ public partial class Player : CharacterBody3D {
     Shoot();
   }
 
-  // TODO: 长按连发
   public void Shoot() {
-    if (!Input.IsActionJustPressed("shoot")) {
+    if (!(Input.IsActionPressed("shoot") && _timer.IsStopped())) {
+      // 不是（按下并且停了计时器）
       return;
     }
+    _timer.Start(); // 重新开始计时
+
     // 这两个导出变量要在编辑器里手动赋值；字段改名后场景里存的旧值会失效，这里兜一下防止空引用
     if (BulletPrefab == null || BulletSpawnerNode == null) {
       GD.PrintErr("BulletPrefab 或 BulletSpawnerNode 未赋值，无法发射子弹");

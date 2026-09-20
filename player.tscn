@@ -41,3 +41,7 @@ transform = Transform3D(-0.30442965, 0, -0.018644037, 0, 0.305, 0, 0.018644037, 
 
 [node name="BulletLoc" type="Marker3D" parent="Camera3D/gun_model" unique_id=540520630]
 transform = Transform3D(-0.99999976, 0, 8.7422755e-08, 0, 1, 0, -8.7422755e-08, 0, -0.99999976, -0.011475921, 0.005264759, 0.66712976)
+
+[node name="Timer" type="Timer" parent="." unique_id=1611592674]
+wait_time = 0.5
+one_shot = true
