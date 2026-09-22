@@ -1,16 +1,18 @@
 [gd_scene format=3 uid="uid://cp4d3iela7kmf"]
 
 [ext_resource type="PackedScene" uid="uid://c334aygnhhpwn" path="res://mob/bat/bat_model.tscn" id="1_dy6sc"]
+[ext_resource type="Script" uid="uid://d0dg7wuetadki" path="res://Mob.cs" id="1_nokgg"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1xspc"]
 radius = 1.0
 
 [node name="Mob" type="RigidBody3D" unique_id=847851594]
 gravity_scale = 0.0
+script = ExtResource("1_nokgg")
 
-[node name="bat_model" parent="." unique_id=1180438560 instance=ExtResource("1_dy6sc")]
+[node name="BatModel" parent="." unique_id=1180438560 instance=ExtResource("1_dy6sc")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2005792907]
+[node name="Collision" type="CollisionShape3D" parent="." unique_id=2005792907]
 transform = Transform3D(0.395, 0, 0, 0, 0.395, 0, 0, 0, 0.395, 0, 0, 0)
 shape = SubResource("SphereShape3D_1xspc")
