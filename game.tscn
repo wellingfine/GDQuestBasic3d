@@ -3,6 +3,7 @@
 [ext_resource type="Material" uid="uid://bht1o03g5qdqb" path="res://floor.m.tres" id="1_e2o6t"]
 [ext_resource type="Material" uid="uid://bnmejd8owmsef" path="res://jumpfloor.m.tres" id="2_feb5d"]
 [ext_resource type="PackedScene" uid="uid://k57gpiqxpq57" path="res://player.tscn" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://cp4d3iela7kmf" path="res://mob.tscn" id="4_fc0e3"]
 
 [sub_resource type="Environment" id="Environment_1xspc"]
 background_mode = 1
@@ -18,61 +19,63 @@ fog_height_density = 0.15
 
 [node name="Game" type="Node3D" unique_id=2013732599]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1957540352]
+[node name="Level" type="Node" parent="." unique_id=2020380219]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level" unique_id=1957540352]
 transform = Transform3D(0.71999997, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -0.35124302, -10.049643, 0)
 use_collision = true
 size = Vector3(10, 22, 9)
 material = ExtResource("1_e2o6t")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1483171444]
+[node name="CSGBox3D4" type="CSGBox3D" parent="Level" unique_id=1483171444]
 transform = Transform3D(1.2, 0, 0, 0, 1, 0, 0, 0, 0.9, 1, -11.049643, -14)
 use_collision = true
 size = Vector3(10, 22, 9)
 material = ExtResource("1_e2o6t")
 
-[node name="CSGBox3D9" type="CSGBox3D" parent="." unique_id=667754143]
+[node name="CSGBox3D9" type="CSGBox3D" parent="Level" unique_id=667754143]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 5.6635346, -0.5996425, 0.4759159)
 material_override = ExtResource("2_feb5d")
 use_collision = true
 size = Vector3(2, 1, 6)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=614476637]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Level" unique_id=614476637]
 transform = Transform3D(1.36, 0, 0, 0, 1, 0, 0, 0, 1.26, 17.780388, -11.049643, 0.18535995)
 use_collision = true
 size = Vector3(10, 22, 9)
 material = ExtResource("1_e2o6t")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=331996295]
+[node name="CSGBox3D3" type="CSGBox3D" parent="Level" unique_id=331996295]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.112152, -11.049643, -14.185358)
 use_collision = true
 size = Vector3(10, 22, 9)
 material = ExtResource("1_e2o6t")
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="." unique_id=1943238694]
+[node name="CSGBox3D7" type="CSGBox3D" parent="Level" unique_id=1943238694]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.1032448, -0.59964275, -7.987163)
 material_override = ExtResource("2_feb5d")
 use_collision = true
 size = Vector3(1.4210205, 1, 6)
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="." unique_id=855209971]
+[node name="CSGBox3D8" type="CSGBox3D" parent="Level" unique_id=855209971]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.1032448, -0.59964275, -5.709444)
 material_override = ExtResource("2_feb5d")
 use_collision = true
 size = Vector3(1.4210205, 1, 6)
 
-[node name="CSGBox3D11" type="CSGBox3D" parent="." unique_id=1264850491]
+[node name="CSGBox3D11" type="CSGBox3D" parent="Level" unique_id=1264850491]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8.907322, -0.59964275, -0.48177624)
 material_override = ExtResource("2_feb5d")
 use_collision = true
 size = Vector3(2, 1, 6)
 
-[node name="CSGBox3D10" type="CSGBox3D" parent="." unique_id=1523045464]
+[node name="CSGBox3D10" type="CSGBox3D" parent="Level" unique_id=1523045464]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 10.18365, -0.643208, -13.871045)
 material_override = ExtResource("2_feb5d")
 use_collision = true
 size = Vector3(2.3485107, 1, 6)
 
-[node name="CSGBox3D12" type="CSGBox3D" parent="." unique_id=980813416]
+[node name="CSGBox3D12" type="CSGBox3D" parent="Level" unique_id=980813416]
 transform = Transform3D(-2.1855696e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855695e-07, 18.264912, -0.643208, -7.365336)
 material_override = ExtResource("2_feb5d")
 use_collision = true
@@ -86,5 +89,8 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70
 [node name="WorldEnvironment" type="WorldEnvironment" parent="env" unique_id=1258632537]
 environment = SubResource("Environment_1xspc")
 
-[node name="Node3D" parent="." unique_id=304244398 instance=ExtResource("3_feb5d")]
+[node name="Player" parent="." unique_id=304244398 instance=ExtResource("3_feb5d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, 2)
+
+[node name="Mob" parent="." unique_id=847851594 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.8162236, -4)
