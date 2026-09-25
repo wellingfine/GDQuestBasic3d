@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://bu7sdvv5tlenf"]
+
+[ext_resource type="PackedScene" uid="uid://bum3oi2qxilk4" path="res://mob/spawner/spawner_model.glb" id="1_t8boo"]
+[ext_resource type="Shader" uid="uid://cfnwyva3u4qeb" path="res://mob/spawner/spawner_halo.gdshader" id="2_bk78j"]
+[ext_resource type="Material" uid="uid://bh1ego7bi1olb" path="res://mob/spawner/spawner_screen_material.tres" id="3_lvlhh"]
+[ext_resource type="AnimationLibrary" uid="uid://cciitkolxuprl" path="res://mob/spawner/Spawner.alib.tres" id="4_lvlhh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wm3uc"]
+render_priority = 0
+shader = ExtResource("2_bk78j")
+shader_parameter/color = Color(0.7601854, 1.5114104, 1.2775384, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vxew4"]
+albedo_color = Color(1, 0.50446814, 0.69517595, 1)
+metallic = 0.55
+roughness = 0.35
+rim_enabled = true
+rim = 0.55
+
+[sub_resource type="Animation" id="Animation_lvlhh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Top:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p6j4b"]
+_data = {
+&"RESET": SubResource("Animation_lvlhh")
+}
+
+[node name="spawner_model" unique_id=2015988780 instance=ExtResource("1_t8boo")]
+
+[node name="halo" parent="." index="0" unique_id=310200379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63588774, 0)
+material_override = SubResource("ShaderMaterial_wm3uc")
+
+[node name="Body" parent="." index="1" unique_id=1528887429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39014, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_vxew4")
+surface_material_override/1 = ExtResource("3_lvlhh")
+
+[node name="Top" parent="." index="2" unique_id=109269954]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 2.3784661, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3" unique_id=653037640]
+libraries/ = SubResource("AnimationLibrary_p6j4b")
+libraries/Spawner.alib = ExtResource("4_lvlhh")
+autoplay = &"Spawner.alib/Rotate"

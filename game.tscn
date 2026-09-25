@@ -4,6 +4,7 @@
 [ext_resource type="Material" uid="uid://bnmejd8owmsef" path="res://jumpfloor.m.tres" id="2_feb5d"]
 [ext_resource type="PackedScene" uid="uid://k57gpiqxpq57" path="res://player.tscn" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://cp4d3iela7kmf" path="res://mob.tscn" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://c88w3q72svnb1" path="res://mob/spawner/MobSpawner.tscn" id="5_7jktm"]
 
 [sub_resource type="Environment" id="Environment_1xspc"]
 background_mode = 1
@@ -94,3 +95,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, 2)
 
 [node name="Mob" parent="." unique_id=847851594 instance=ExtResource("4_fc0e3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.8162236, -4)
+
+[node name="MobSpawner" parent="." unique_id=120616841 instance=ExtResource("5_7jktm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -15)

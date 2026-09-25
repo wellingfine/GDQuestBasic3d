@@ -9,6 +9,8 @@ public partial class Mob : RigidBody3D {
 
   // private speed=Random()
 
+  private int health = 5;
+
   public override void _Ready() {
     _batModel = GetNode<BatModel>("BatModel");
     _player = GetNode<Player>("/root/Game/Player");
@@ -34,7 +36,16 @@ public partial class Mob : RigidBody3D {
   }
 
   public void takeDamage() {
+    if (health == 0) {
+      return;
+    }
     // 受击时让模型播一次受击动画，播完由动画树自动回到 Idle
     _batModel?.PlayOneShotAnimation();
+    health -= 1;
+    if (health == 0) {
+      // 播放死亡动画
+      // _batModel.
+    }
+
   }
 }

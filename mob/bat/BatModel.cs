@@ -22,4 +22,7 @@ public partial class BatModel : Node3D {
 
     _animationTree.Set(OneShotRequestPath, (int)AnimationNodeOneShot.OneShotRequest.Fire);
   }
+  public void PlayDead() {
+
+  }
 }

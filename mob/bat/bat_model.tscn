@@ -15,7 +15,6 @@ animation = &"Idle"
 mix_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wr5w3"]
-graph_offset = Vector2(0, -107.20755)
 nodes/output/position = Vector2(1014.33966, 0)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_vgr6s")
 nodes/Animation/position = Vector2(380.37738, 18.113209)
@@ -28,25 +27,25 @@ node_connections = [&"output", 0, &"OneShot", &"OneShot", 0, &"Animation", &"One
 [node name="bat_model" unique_id=1180438560 instance=ExtResource("1_1he7g")]
 script = ExtResource("2_vgr6s")
 
-[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(542223952) index="0" unique_id=2025788129]
-bones/0/position = Vector3(0, -0.020700753, 0)
-bones/1/rotation = Quaternion(-0.060139768, 0.21345074, -0.6636707, 0.7143971)
-bones/2/rotation = Quaternion(-0.15682305, -0.04206678, 0.2554901, 0.9530802)
-bones/3/rotation = Quaternion(-0.08599276, 0.027924072, 0.22539394, 0.9700635)
-bones/4/rotation = Quaternion(-0.060139768, -0.21345074, 0.6636707, 0.7143971)
-bones/5/rotation = Quaternion(-0.15682305, 0.04206678, -0.2554901, 0.9530802)
-bones/6/rotation = Quaternion(-0.08599276, -0.027924072, -0.22539394, 0.9700635)
+[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(332120255) index="0" unique_id=271052745]
+bones/0/position = Vector3(0, 0.0062761907, 0)
+bones/1/rotation = Quaternion(0.18540697, 0.0039092605, -0.5905673, 0.7853912)
+bones/2/rotation = Quaternion(0.045189515, 0.020025512, 0.40193263, 0.9143343)
+bones/3/rotation = Quaternion(-0.07573764, 0.024378859, 0.31573123, 0.94550693)
+bones/4/rotation = Quaternion(0.18540697, -0.0039092605, 0.5905673, 0.7853912)
+bones/5/rotation = Quaternion(0.045189515, -0.020025512, -0.40193263, 0.9143343)
+bones/6/rotation = Quaternion(-0.07573764, -0.024378859, -0.31573123, 0.94550693)
 bones/7/position = Vector3(0.1309921, -0.22739176, -0.087851465)
 bones/7/rotation = Quaternion(0.26196837, 0.08345512, 0.26575127, 0.9240044)
-bones/8/rotation = Quaternion(3.9533088e-08, 0.64494395, 0.76422983, 2.4887084e-08)
+bones/8/rotation = Quaternion(3.3197146e-08, 0.55420136, 0.83238274, 2.078223e-08)
 bones/10/position = Vector3(-0.1309921, -0.22739176, -0.087851465)
 bones/10/rotation = Quaternion(0.26196837, -0.083455116, -0.26575127, 0.9240044)
-bones/11/rotation = Quaternion(2.6376844e-08, 0.64494395, 0.76422983, 3.4117427e-08)
+bones/11/rotation = Quaternion(2.3458675e-08, 0.5542014, 0.8323826, 3.6772658e-08)
 
-[node name="bat" parent="Armature/Skeleton3D" index="0" unique_id=1708197969]
+[node name="bat" parent="Armature/Skeleton3D" index="0" unique_id=1967940358]
 surface_material_override/0 = ExtResource("2_030dj")
 
-[node name="AnimationPlayer" parent="." index="1" unique_id=2053563591]
+[node name="AnimationPlayer" parent="." index="1" unique_id=397765837]
 libraries/animation.lib = ExtResource("3_vgr6s")
 autoplay = &"Idle"
 
