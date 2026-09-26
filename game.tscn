@@ -98,3 +98,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.8162236, -4)
 
 [node name="MobSpawner" parent="." unique_id=120616841 instance=ExtResource("5_7jktm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -15)
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=635493990]
+offset_left = 44.0
+offset_top = 37.0
+offset_right = 524.0
+offset_bottom = 107.0
+theme_override_font_sizes/font_size = 51
+text = "Score: 0"
