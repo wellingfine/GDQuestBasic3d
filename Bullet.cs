@@ -29,7 +29,7 @@ public partial class Bullet : Area3D {
 
     // 打到怪物就让它掉血
     if (body is Mob mob) {
-      mob.takeDamage();
+      mob.TakeDamage();
     }
 
     // 子弹命中即销毁，不论撞到的是怪物还是墙/地面

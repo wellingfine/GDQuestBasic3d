@@ -1,7 +1,12 @@
 using Godot;
 using System;
 
+// 蝙蝠小怪：每帧朝玩家水平推进，受击掉血，血尽时广播死亡事件。
+// 分数只通过 GameEvents 广播，Mob 自身不关心谁在计分。
 public partial class Mob : RigidBody3D {
+
+  // 追击速度（单位/秒）。TODO: 想要个体差异化时改成 [Export] 并在 _Ready 里随机取值
+  private const float MoveSpeed = 3.0f;
 
   private BatModel _batModel;
 
@@ -11,9 +16,7 @@ public partial class Mob : RigidBody3D {
   private AudioStreamPlayer3D _audioHurt;
   private AudioStreamPlayer3D _audioDie;
 
-  // private speed=Random()
-
-  private int health = 5;
+  private int _health = 5;
 
   // 打死这只怪给多少分，可在检查器里按怪的强度调
   [Export] public int ScoreValue = 1;
@@ -26,11 +29,13 @@ public partial class Mob : RigidBody3D {
   }
 
   public override void _PhysicsProcess(double delta) {
+    // 每帧重新算一次朝向玩家的水平方向，玩家移动后能立刻跟上
     var dir = GlobalPosition.DirectionTo(_player.GlobalPosition);
     dir.Y = 0;
 
-    LinearVelocity = dir * 3;
+    LinearVelocity = dir * MoveSpeed;
 
+    // 贴脸时 dir 接近零向量，归一化会出 NaN，先判长度再转向
     if (dir.LengthSquared() > 0.0001f) {
       FacePlayer(dir.Normalized());
     }
@@ -44,24 +49,28 @@ public partial class Mob : RigidBody3D {
     _batModel.GlobalRotation = new Vector3(0.0f, yaw, 0.0f);
   }
 
-  public void takeDamage() {
-    if (health <= 0) {
-      // 已经死了，忽略后续命中，防止同一只怪重复加分
+  // 被子弹命中时调用：播放受击表现 → 扣血 → 血尽则广播死亡
+  public void TakeDamage() {
+    if (_health <= 0) {
+      // 已死，忽略后续命中，避免同一只怪重复扣分、重复加分
       return;
     }
-    // 受击时让模型播一次受击动画，播完由动画树自动回到 Idle
+
+    // 受击动画播完由动画树自动回到 Idle，不用手动切状态
     _batModel?.PlayOneShotAnimation();
     _audioHurt?.Play();
-    health -= 1;
-    if (health == 0) {
-      // 只广播「我死了，值多少分」，谁关心分数由谁自己去订阅，
-      // Mob 不需要知道 Player / UI 的存在
-      GameEvents.Instance.EmitMobDied(ScoreValue);
-      _audioDie?.Play();
 
-      // TODO: 播死亡动画，动画播完再 QueueFree()，
-      // 否则节点一释放死亡音效会被立刻掐断
-      // QueueFree();
+    _health -= 1;
+    if (_health > 0) {
+      return;
     }
+
+    // 只广播「我死了，值多少分」，谁关心分数谁自己去订阅，Mob 不依赖 Player / UI
+    GameEvents.Instance.EmitMobDied(ScoreValue);
+    _audioDie?.Play();
+
+    // TODO: 播死亡动画，等动画播完再 QueueFree()；
+    // 现在直接释放会把刚播放的死亡音效一起掐断
+    // QueueFree();
   }
 }
