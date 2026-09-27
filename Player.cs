@@ -15,6 +15,7 @@ public partial class Player : CharacterBody3D {
   [Export] public PackedScene BulletPrefab;
   [Export] public Node3D BulletSpawnerNode;
 
+  private AudioStreamPlayer _audioStreamPlayer;
   private Label _scoreLabel;
   int score = 0;
 
@@ -27,6 +28,7 @@ public partial class Player : CharacterBody3D {
     _camera = GetNode<Camera3D>("Camera3D");
     _timer = GetNode<Timer>("Timer");
     _scoreLabel = GetNode<Label>("/root/Game/ScoreLabel");
+    _audioStreamPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 
     // 分数只在这里被改动：订阅全局的怪物死亡事件，自己负责累加和刷新 UI
     GameEvents.Instance.MobDied += OnMobDied;
@@ -139,7 +141,7 @@ public partial class Player : CharacterBody3D {
     BulletSpawnerNode.AddChild(bullet);
     bullet.TopLevel = true;
     bullet.GlobalTransform = BulletSpawnerNode.GlobalTransform;
-
+    _audioStreamPlayer.Play();
 
     // GD.Print($"transform {bullet.Transform}");
   }

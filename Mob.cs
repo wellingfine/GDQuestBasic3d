@@ -7,6 +7,10 @@ public partial class Mob : RigidBody3D {
 
   private Player _player;
 
+  // 场景里挂好的两个 3D 音效播放器：AudioHurt 受击、AudioDie 死亡
+  private AudioStreamPlayer3D _audioHurt;
+  private AudioStreamPlayer3D _audioDie;
+
   // private speed=Random()
 
   private int health = 5;
@@ -17,6 +21,8 @@ public partial class Mob : RigidBody3D {
   public override void _Ready() {
     _batModel = GetNode<BatModel>("BatModel");
     _player = GetNode<Player>("/root/Game/Player");
+    _audioHurt = GetNode<AudioStreamPlayer3D>("AudioHurt");
+    _audioDie = GetNode<AudioStreamPlayer3D>("AudioDie");
   }
 
   public override void _PhysicsProcess(double delta) {
@@ -45,14 +51,17 @@ public partial class Mob : RigidBody3D {
     }
     // 受击时让模型播一次受击动画，播完由动画树自动回到 Idle
     _batModel?.PlayOneShotAnimation();
+    _audioHurt?.Play();
     health -= 1;
     if (health == 0) {
       // 只广播「我死了，值多少分」，谁关心分数由谁自己去订阅，
       // Mob 不需要知道 Player / UI 的存在
       GameEvents.Instance.EmitMobDied(ScoreValue);
+      _audioDie?.Play();
 
-      // TODO: 播死亡动画，动画播完再 QueueFree()
-      QueueFree();
+      // TODO: 播死亡动画，动画播完再 QueueFree()，
+      // 否则节点一释放死亡音效会被立刻掐断
+      // QueueFree();
     }
   }
 }
