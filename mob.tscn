@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c334aygnhhpwn" path="res://mob/bat/bat_model.tscn" id="1_dy6sc"]
 [ext_resource type="Script" uid="uid://d0dg7wuetadki" path="res://Mob.cs" id="1_nokgg"]
 [ext_resource type="AudioStream" uid="uid://bai7wvabhjv7g" path="res://mob/mob_take_damage.wav" id="3_p11y5"]
+[ext_resource type="Script" path="res://Collision.cs" id="3_s5nov"]
 [ext_resource type="AudioStream" uid="uid://bv66wdnhk4a6f" path="res://mob/mob_ko.wav" id="4_s5nov"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1xspc"]
@@ -18,6 +19,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 [node name="Collision" type="CollisionShape3D" parent="." unique_id=2005792907]
 transform = Transform3D(0.395, 0, 0, 0, 0.395, 0, 0, 0, 0.395, 0, 0, 0)
 shape = SubResource("SphereShape3D_1xspc")
+script = ExtResource("3_s5nov")
 
 [node name="Timer" type="Timer" parent="." unique_id=437285385]
 

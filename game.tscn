@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://bgrsguprdu0fl"]
 
 [ext_resource type="Material" uid="uid://bht1o03g5qdqb" path="res://floor.m.tres" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://6fqwkdeg8v5r" path="res://Game.cs" id="1_ryrav"]
 [ext_resource type="Material" uid="uid://bnmejd8owmsef" path="res://jumpfloor.m.tres" id="2_feb5d"]
 [ext_resource type="PackedScene" uid="uid://k57gpiqxpq57" path="res://player.tscn" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://cp4d3iela7kmf" path="res://mob.tscn" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://c88w3q72svnb1" path="res://mob/spawner/MobSpawner.tscn" id="5_7jktm"]
+[ext_resource type="Script" uid="uid://dmd1b4c8xx0ai" path="res://KillZone.cs" id="7_eow3j"]
 
 [sub_resource type="Environment" id="Environment_1xspc"]
 background_mode = 1
@@ -18,7 +20,10 @@ fog_density = 0.0
 fog_height = 0.5
 fog_height_density = 0.15
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_s5nov"]
+
 [node name="Game" type="Node3D" unique_id=2013732599]
+script = ExtResource("1_ryrav")
 
 [node name="Level" type="Node" parent="." unique_id=2020380219]
 
@@ -106,3 +111,10 @@ offset_right = 524.0
 offset_bottom = 107.0
 theme_override_font_sizes/font_size = 51
 text = "Score: 0"
+
+[node name="KillZone" type="Area3D" parent="." unique_id=1090967326]
+script = ExtResource("7_eow3j")
+
+[node name="Collision3d" type="CollisionShape3D" parent="KillZone" unique_id=388166172]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+shape = SubResource("WorldBoundaryShape3D_s5nov")

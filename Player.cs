@@ -19,6 +19,9 @@ public partial class Player : CharacterBody3D {
   private Label _scoreLabel;
   int score = 0;
 
+  // 出生点，_Ready 时记录一次，掉出地图后回到这里
+  private Vector3 _spawnPosition;
+
   // 挂在角色身上的相机，只负责上下（俯仰）旋转
   private Camera3D _camera;
   private Timer _timer;
@@ -30,8 +33,14 @@ public partial class Player : CharacterBody3D {
     _scoreLabel = GetNode<Label>("/root/Game/ScoreLabel");
     _audioStreamPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 
+    // 出生点就用场景里摆好的位置，改场景不用同步改代码
+    _spawnPosition = GlobalPosition;
+
     // 分数只在这里被改动：订阅全局的怪物死亡事件，自己负责累加和刷新 UI
     GameEvents.Instance.MobDied += OnMobDied;
+
+    // 掉出地图后自己复活，KillZone 不需要知道玩家该怎么处理
+    GameEvents.Instance.PlayerFell += OnPlayerFell;
 
     // 捕获鼠标：光标隐藏并锁定在窗口内，这样能持续拿到相对位移
     Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -109,10 +118,21 @@ public partial class Player : CharacterBody3D {
   // 节点被移除时一定记得退订，否则 Player 会被事件总线一直引用着，无法释放
   public override void _ExitTree() {
     GameEvents.Instance.MobDied -= OnMobDied;
+    GameEvents.Instance.PlayerFell -= OnPlayerFell;
   }
 
   private void OnMobDied(int score) {
     AddScore(score);
+  }
+
+  private void OnPlayerFell() {
+    Respawn();
+  }
+
+  // 回到出生点并清空速度，否则会带着下落速度继续加速下坠
+  public void Respawn() {
+    GlobalPosition = _spawnPosition;
+    Velocity = Vector3.Zero;
   }
 
   // 对外只暴露「加分」这一个动作，分数怎么存、UI 怎么刷新都是 Player 自己的事
